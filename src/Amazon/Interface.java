@@ -16,7 +16,10 @@ import javax.swing.JList;
 public class Interface extends javax.swing.JFrame {
     JList list;
     int currentBook = 0;
+    int currentSoftware = 0;
     Book[] bookList;
+    Software[] softwareList;
+    
     DefaultListModel model = new DefaultListModel();
     /**
      * Creates new form Interface
@@ -24,6 +27,7 @@ public class Interface extends javax.swing.JFrame {
     
     public Interface() {
         this.bookList = new Book [100];
+        this.softwareList = new Software [100];
         
         initComponents();
         
@@ -655,13 +659,17 @@ public class Interface extends javax.swing.JFrame {
             
             //Book b1 = new Book(001,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
         
-            if (evt.getSource() == jBSubmit){
+            if (evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("  Submit Book  ")){
            
             
-            System.out.println("Submit Clicked!");
+            System.out.println("Book Added!");
             bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, bAuthor, bISBN, bNumberPages);        
             currentBook++;
-        }
+        } else {
+            System.out.println("Software Added!");
+            softwareList[currentSoftware] = new Software(pID, pName, pCost, pYearPub, pPubHouse, bAuthor, bISBN, bNumberPages);        
+            currentBook++;
+            }
         
         
         
