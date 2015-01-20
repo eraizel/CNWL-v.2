@@ -410,7 +410,7 @@ public class Interface extends javax.swing.JFrame {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 258, Short.MAX_VALUE)
+            .addGap(0, 280, Short.MAX_VALUE)
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -467,14 +467,14 @@ public class Interface extends javax.swing.JFrame {
         });
 
         jBVBooks.setText("View Books");
-        jBVBooks.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBVBooksMouseClicked(evt);
-            }
-        });
         jBVBooks.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jBVBooksStateChanged(evt);
+            }
+        });
+        jBVBooks.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBVBooksMouseClicked(evt);
             }
         });
 
@@ -515,7 +515,7 @@ public class Interface extends javax.swing.JFrame {
                         .addGap(23, 23, 23))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -648,6 +648,11 @@ public class Interface extends javax.swing.JFrame {
 
     private void jBSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBSubmitMouseClicked
         // TODO add your handling code here:
+            
+            
+            //Book b1 = new Book(001,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
+        
+            if (evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("  Submit Book  ")){
             int pID = Integer.parseInt(jTID.getText());
             String pName = jTName.getText();
             String pPubHouse = jTPHouse.getText();
@@ -657,18 +662,21 @@ public class Interface extends javax.swing.JFrame {
             int bNumberPages = Integer.parseInt(jTNPages.getText());
             String bISBN = jTISBN.getText();
             
-            //Book b1 = new Book(001,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
-        
-            if (evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("  Submit Book  ")){
-           
-            
             System.out.println("Book Added!");
             bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, bAuthor, bISBN, bNumberPages);        
             currentBook++;
         } else {
+            int pID = Integer.parseInt(jTID.getText());
+            String pName = jTName.getText();
+            String pPubHouse = jTPHouse.getText();
+            int pYearPub = Integer.parseInt(jTPYear.getText());
+            double pCost = Double.parseDouble(jTCost.getText());
+            int sHardDisk = Integer.parseInt(jTHDisk.getText());
+            double sProcSpeed = Double.parseDouble(jTPSpeed.getText());
+            String sMinRequirements = jTMReq.getText();
             System.out.println("Software Added!");
-            softwareList[currentSoftware] = new Software(pID, pName, pCost, pYearPub, pPubHouse, bAuthor, bISBN, bNumberPages);        
-            currentBook++;
+            softwareList[currentSoftware] = new Software(pID, pName, pCost, pYearPub, pPubHouse, sHardDisk, sProcSpeed, sMinRequirements);        
+            currentSoftware++;
             }
         
         
