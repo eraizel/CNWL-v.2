@@ -2,6 +2,7 @@ package Amazon;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,7 +37,7 @@ public class Interface extends javax.swing.JFrame {
         //Software s1 = new Software(1,"Microsoft Office",99.99,2014,"Microsoft",500, 2.2, "Windows 7");
         
         jBSubmit.setVisible(false);
-        jBVBooks.setVisible(false);
+        jBView.setVisible(false);
         jBBBook.setVisible(false);
         jLID.setVisible(false);
         jTID.setVisible(false);
@@ -113,7 +114,7 @@ public class Interface extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jBSubmit = new javax.swing.JButton();
-        jBVBooks = new javax.swing.JButton();
+        jBView = new javax.swing.JButton();
         jBBBook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -466,15 +467,15 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jBVBooks.setText("View Books");
-        jBVBooks.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jBVBooksStateChanged(evt);
+        jBView.setText("View Books");
+        jBView.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBViewMouseClicked(evt);
             }
         });
-        jBVBooks.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBVBooksMouseClicked(evt);
+        jBView.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jBViewStateChanged(evt);
             }
         });
 
@@ -497,7 +498,7 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jBSubmit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBVBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jBView, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBBBook, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(58, 58, 58)))
@@ -522,7 +523,7 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jBSubmit)
-                            .addComponent(jBVBooks)
+                            .addComponent(jBView)
                             .addComponent(jBBBook))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -559,10 +560,10 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPGroups.setVisible(true);
         jBSubmit.setText("  Submit Book  ");
-        jBVBooks.setText("  View Book  ");
+        jBView.setText("  View Book  ");
         jBBBook.setText("  Buy Book  ");
         jBSubmit.setVisible(true);
-        jBVBooks.setVisible(true);
+        jBView.setVisible(true);
         jBBBook.setVisible(true);
         jLID.setVisible(true);
         jTID.setVisible(true);
@@ -600,10 +601,10 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPGroups.setVisible(true);
         jBSubmit.setText("Submit Software");
-        jBVBooks.setText("View Software");
+        jBView.setText("View Software");
         jBBBook.setText("Buy Software");
         jBSubmit.setVisible(true);
-        jBVBooks.setVisible(true);
+        jBView.setVisible(true);
         jBBBook.setVisible(true);
         jLAuthor.setVisible(false);
         jTAuthor.setVisible(false);
@@ -653,30 +654,51 @@ public class Interface extends javax.swing.JFrame {
             //Book b1 = new Book(001,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
         
             if (evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("  Submit Book  ")){
-            int pID = Integer.parseInt(jTID.getText());
-            String pName = jTName.getText();
-            String pPubHouse = jTPHouse.getText();
-            int pYearPub = Integer.parseInt(jTPYear.getText());
-            double pCost = Double.parseDouble(jTCost.getText());
-            String bAuthor = jTAuthor.getText();
-            int bNumberPages = Integer.parseInt(jTNPages.getText());
-            String bISBN = jTISBN.getText();
             
-            System.out.println("Book Added!");
-            bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, bAuthor, bISBN, bNumberPages);        
-            currentBook++;
+                try{
+                int pID = Integer.parseInt(jTID.getText());
+                String pName = jTName.getText();
+                String pPubHouse = jTPHouse.getText();
+                int pYearPub = Integer.parseInt(jTPYear.getText());
+                double pCost = Double.parseDouble(jTCost.getText());
+                String bAuthor = jTAuthor.getText();
+                int bNumberPages = Integer.parseInt(jTNPages.getText());
+                String bISBN = jTISBN.getText();
+
+                JOptionPane.showMessageDialog(null, "Book Added!");
+                bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, 
+                        bAuthor, bISBN, bNumberPages);        
+                currentBook++;
+                }catch(IllegalArgumentException e){
+                    JOptionPane.showMessageDialog(null, "Error there is an empty"
+                            + " field, please complete all fields before clicking submit");
+                }
         } else {
-            int pID = Integer.parseInt(jTID.getText());
-            String pName = jTName.getText();
-            String pPubHouse = jTPHouse.getText();
-            int pYearPub = Integer.parseInt(jTPYear.getText());
-            double pCost = Double.parseDouble(jTCost.getText());
-            int sHardDisk = Integer.parseInt(jTHDisk.getText());
-            double sProcSpeed = Double.parseDouble(jTPSpeed.getText());
-            String sMinRequirements = jTMReq.getText();
-            System.out.println("Software Added!");
-            softwareList[currentSoftware] = new Software(pID, pName, pCost, pYearPub, pPubHouse, sHardDisk, sProcSpeed, sMinRequirements);        
-            currentSoftware++;
+                
+                try{
+                    int pID = Integer.parseInt(jTID.getText());
+                    String pName = jTName.getText();
+                    String pPubHouse = jTPHouse.getText();
+                    int pYearPub = Integer.parseInt(jTPYear.getText());
+                    double pCost = Double.parseDouble(jTCost.getText());
+                    int sHardDisk = Integer.parseInt(jTHDisk.getText());
+                    double sProcSpeed = Double.parseDouble(jTPSpeed.getText());
+                    String sMinRequirements = jTMReq.getText();
+                    
+                    softwareList[currentSoftware] = new Software(pID, pName, 
+                            pCost, pYearPub, pPubHouse, sHardDisk, sProcSpeed, sMinRequirements);        
+                    currentSoftware++;
+                }
+                catch(IllegalArgumentException e ){
+                    JOptionPane.showMessageDialog(null, "Error there is an empty"
+                            + " field, please complete all fields before clicking submit");
+                    
+                
+                
+                }
+            JOptionPane.showMessageDialog(null, "Software Added!");
+           
+            
             }
         
         
@@ -712,9 +734,14 @@ public class Interface extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jBSubmitActionPerformed
 
-    private void jBVBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBVBooksMouseClicked
+    private void jBViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBViewMouseClicked
         // TODO add your handling code here:
-        
+        if (evt.getSource() == jBView && jBView.getText().contentEquals("  View Book  ")){
+            JOptionPane.showMessageDialog(null, "retrieving books...");
+            
+        }else {
+            JOptionPane.showMessageDialog(null, "retrieving software...");
+        }
         //System.out.print(b1);
         
         jLID.setVisible(false);
@@ -743,12 +770,12 @@ public class Interface extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jBVBooksMouseClicked
+    }//GEN-LAST:event_jBViewMouseClicked
 
-    private void jBVBooksStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jBVBooksStateChanged
+    private void jBViewStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jBViewStateChanged
         // TODO add your handling code here:
         
-    }//GEN-LAST:event_jBVBooksStateChanged
+    }//GEN-LAST:event_jBViewStateChanged
 
     /**
      * @param args the command line arguments
@@ -790,7 +817,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton jBBooks;
     private javax.swing.JButton jBSoftware;
     private javax.swing.JButton jBSubmit;
-    private javax.swing.JButton jBVBooks;
+    private javax.swing.JButton jBView;
     private javax.swing.JLabel jLAuthor;
     private javax.swing.JLabel jLCost;
     private javax.swing.JLabel jLHDisk;

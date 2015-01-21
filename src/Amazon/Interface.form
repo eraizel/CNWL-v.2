@@ -38,7 +38,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jBSubmit" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jBVBooks" min="-2" pref="130" max="-2" attributes="0"/>
+                      <Component id="jBView" min="-2" pref="130" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jBBBook" min="-2" pref="136" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
@@ -71,7 +71,7 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jBSubmit" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jBVBooks" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jBView" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jBBBook" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -565,13 +565,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBSubmitActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jBVBooks">
+    <Component class="javax.swing.JButton" name="jBView">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Books"/>
       </Properties>
       <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jBVBooksStateChanged"/>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBVBooksMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jBViewMouseClicked"/>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jBViewStateChanged"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jBBBook">
