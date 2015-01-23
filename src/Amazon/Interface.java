@@ -21,7 +21,9 @@ public class Interface extends javax.swing.JFrame {
     Book[] bookList;
     Software[] softwareList;
     
-    DefaultListModel model = new DefaultListModel();
+    DefaultListModel dlmBook = new DefaultListModel();
+    DefaultListModel dlmSoftware = new DefaultListModel();
+    DefaultListModel dlmOrder = new DefaultListModel();
     /**
      * Creates new form Interface
      */
@@ -37,8 +39,6 @@ public class Interface extends javax.swing.JFrame {
         //Software s1 = new Software(1,"Microsoft Office",99.99,2014,"Microsoft",500, 2.2, "Windows 7");
         
         jBSubmit.setVisible(false);
-        jBView.setVisible(false);
-        jBBBook.setVisible(false);
         jLID.setVisible(false);
         jTID.setVisible(false);
         jLName.setVisible(false);
@@ -104,18 +104,22 @@ public class Interface extends javax.swing.JFrame {
         jTMReq = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList = new javax.swing.JList();
+        jListBooks = new javax.swing.JList();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jListSoftware = new javax.swing.JList();
+        jButtonBookOrder = new javax.swing.JButton();
+        jButtonSoftwareOrder = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jListOrder = new javax.swing.JList();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTSubTotal = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTVAT = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTTotal = new javax.swing.JTextField();
         jBSubmit = new javax.swing.JButton();
-        jBView = new javax.swing.JButton();
-        jBBBook = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,9 +165,9 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPOptionsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jBBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSoftware, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(365, 365, 365))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPGroups.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GROUPS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -284,46 +288,46 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTID, javax.swing.GroupLayout.DEFAULT_SIZE, 465, Short.MAX_VALUE))
+                        .addComponent(jTID))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLPHouse)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTPHouse, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE))
+                        .addComponent(jTPHouse))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLPYear)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTPYear, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE))
+                        .addComponent(jTPYear))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLCost)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTCost, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                        .addComponent(jTCost))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLAuthor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTAuthor, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+                        .addComponent(jTAuthor))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLNPages)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTNPages, javax.swing.GroupLayout.DEFAULT_SIZE, 368, Short.MAX_VALUE))
+                        .addComponent(jTNPages))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLabelNumberOfPages)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLISBN)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTISBN, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE))
+                        .addComponent(jTISBN))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLHDisk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTHDisk, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
+                        .addComponent(jTHDisk))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLPSpeed)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTPSpeed, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE))
+                        .addComponent(jTPSpeed))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLMReq)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTMReq, javax.swing.GroupLayout.DEFAULT_SIZE, 330, Short.MAX_VALUE)))
+                        .addComponent(jTMReq)))
                 .addGap(18, 18, 18))
         );
         jPGroupsLayout.setVerticalGroup(
@@ -378,12 +382,28 @@ public class Interface extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "OTHERS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jList.setModel(new javax.swing.AbstractListModel() {
+        jScrollPane1.setViewportView(jListBooks);
+
+        jListSoftware.setModel(new javax.swing.AbstractListModel() {
             String[] strings = {  };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jScrollPane1.setViewportView(jList);
+        jScrollPane2.setViewportView(jListSoftware);
+
+        jButtonBookOrder.setText("Order Book");
+        jButtonBookOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBookOrderActionPerformed(evt);
+            }
+        });
+
+        jButtonSoftwareOrder.setText("Order Software");
+        jButtonSoftwareOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSoftwareOrderActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -391,27 +411,53 @@ public class Interface extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(66, 66, 66)
+                .addComponent(jButtonBookOrder)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButtonSoftwareOrder)
+                .addGap(44, 44, 44))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButtonBookOrder)
+                    .addComponent(jButtonSoftwareOrder))
+                .addGap(0, 9, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDER", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jListOrder.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jListOrderValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jListOrder);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 158, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 280, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -433,9 +479,9 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2)
-                    .addComponent(jTextField1)
-                    .addComponent(jTextField3))
+                    .addComponent(jTVAT, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                    .addComponent(jTSubTotal)
+                    .addComponent(jTTotal))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -443,16 +489,16 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTVAT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 90, Short.MAX_VALUE))
+                    .addComponent(jTTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jBSubmit.setText("Submit Book");
@@ -467,20 +513,6 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jBView.setText("View Books");
-        jBView.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBViewMouseClicked(evt);
-            }
-        });
-        jBView.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jBViewStateChanged(evt);
-            }
-        });
-
-        jBBBook.setText("Buy Book");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -493,40 +525,29 @@ public class Interface extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPGroups, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBSubmit)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jBView, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBBBook, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(207, 207, 207)
+                        .addComponent(jBSubmit)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBSubmit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(23, 23, 23))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jBSubmit)
-                            .addComponent(jBView)
-                            .addComponent(jBBBook))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -559,12 +580,8 @@ public class Interface extends javax.swing.JFrame {
     private void jBBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBBooksMouseClicked
         // TODO add your handling code here:
         jPGroups.setVisible(true);
-        jBSubmit.setText("  Submit Book  ");
-        jBView.setText("  View Book  ");
-        jBBBook.setText("  Buy Book  ");
+        jBSubmit.setText("  Submit Book  ");    
         jBSubmit.setVisible(true);
-        jBView.setVisible(true);
-        jBBBook.setVisible(true);
         jLID.setVisible(true);
         jTID.setVisible(true);
         jLName.setVisible(true);
@@ -601,11 +618,11 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
         jPGroups.setVisible(true);
         jBSubmit.setText("Submit Software");
-        jBView.setText("View Software");
-        jBBBook.setText("Buy Software");
+        
+        
         jBSubmit.setVisible(true);
-        jBView.setVisible(true);
-        jBBBook.setVisible(true);
+        
+       
         jLAuthor.setVisible(false);
         jTAuthor.setVisible(false);
         jLNPages.setVisible(false);
@@ -648,10 +665,7 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jBBooksComponentShown
 
     private void jBSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBSubmitMouseClicked
-        // TODO add your handling code here:
-            
-            
-            //Book b1 = new Book(001,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
+        //Book b1 = new Book(001,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
         
             if (evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("  Submit Book  ")){
             
@@ -667,7 +681,10 @@ public class Interface extends javax.swing.JFrame {
 
                 JOptionPane.showMessageDialog(null, "Book Added!");
                 bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, 
-                        bAuthor, bISBN, bNumberPages);        
+                        bAuthor, bISBN, bNumberPages);
+                
+                dlmBook.addElement("Book "+(currentBook+1)+": "+bookList[currentBook].getProductName());        
+                jListBooks.setModel(dlmBook);
                 currentBook++;
                 }catch(IllegalArgumentException e){
                     JOptionPane.showMessageDialog(null, "Error there is an empty"
@@ -687,6 +704,8 @@ public class Interface extends javax.swing.JFrame {
                     
                     softwareList[currentSoftware] = new Software(pID, pName, 
                             pCost, pYearPub, pPubHouse, sHardDisk, sProcSpeed, sMinRequirements);        
+                    dlmSoftware.addElement("Book "+(currentSoftware+1)+": "+softwareList[currentSoftware].getProductName());        
+                    jListSoftware.setModel(dlmSoftware);
                     currentSoftware++;
                 }
                 catch(IllegalArgumentException e ){
@@ -729,53 +748,22 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jTMReqActionPerformed
 
     private void jBSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSubmitActionPerformed
-        // TODO add your handling code here:
-        
-
+                
     }//GEN-LAST:event_jBSubmitActionPerformed
 
-    private void jBViewMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBViewMouseClicked
-        // TODO add your handling code here:
-        if (evt.getSource() == jBView && jBView.getText().contentEquals("  View Book  ")){
-            JOptionPane.showMessageDialog(null, "retrieving books...");
-            
-        }else {
-            JOptionPane.showMessageDialog(null, "retrieving software...");
-        }
-        //System.out.print(b1);
-        
-        jLID.setVisible(false);
-        jTID.setVisible(false);
-        jLName.setVisible(false);
-        jTName.setVisible(false);
-        jLPHouse.setVisible(false);
-        jTPHouse.setVisible(false);
-        jLPYear.setVisible(false);
-        jTPYear.setVisible(false);
-        jLCost.setVisible(false);
-        jTCost.setVisible(false);
-        jLAuthor.setVisible(false);
-        jTAuthor.setVisible(false);
-        jLNPages.setVisible(false);
-        jTNPages.setVisible(false);
-        jLISBN.setVisible(false);
-        jTISBN.setVisible(false);
-        jLHDisk.setVisible(false);
-        jTHDisk.setVisible(false);
-        jLPSpeed.setVisible(false);
-        jTPSpeed.setVisible(false);
-        jLMReq.setVisible(false);
-        jTMReq.setVisible(false);
-        
-        
-        
-        
-    }//GEN-LAST:event_jBViewMouseClicked
+    private void jButtonBookOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookOrderActionPerformed
+        dlmOrder.addElement(jListBooks.getSelectedValue());        
+        jListOrder.setModel(dlmOrder);
+    }//GEN-LAST:event_jButtonBookOrderActionPerformed
 
-    private void jBViewStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jBViewStateChanged
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_jBViewStateChanged
+    private void jButtonSoftwareOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSoftwareOrderActionPerformed
+        dlmOrder.addElement(jListSoftware.getSelectedValue());        
+        jListOrder.setModel(dlmOrder);
+    }//GEN-LAST:event_jButtonSoftwareOrderActionPerformed
+
+    private void jListOrderValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListOrderValueChanged
+        jTSubTotal.Integer.parseInt(setText());
+    }//GEN-LAST:event_jListOrderValueChanged
 
     /**
      * @param args the command line arguments
@@ -813,11 +801,11 @@ public class Interface extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBBBook;
     private javax.swing.JButton jBBooks;
     private javax.swing.JButton jBSoftware;
     private javax.swing.JButton jBSubmit;
-    private javax.swing.JButton jBView;
+    private javax.swing.JButton jButtonBookOrder;
+    private javax.swing.JButton jButtonSoftwareOrder;
     private javax.swing.JLabel jLAuthor;
     private javax.swing.JLabel jLCost;
     private javax.swing.JLabel jLHDisk;
@@ -833,13 +821,17 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelNumberOfPages;
-    private javax.swing.JList jList;
+    private javax.swing.JList jListBooks;
+    private javax.swing.JList jListOrder;
+    private javax.swing.JList jListSoftware;
     private javax.swing.JPanel jPGroups;
     private javax.swing.JPanel jPOptions;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTAuthor;
     private javax.swing.JTextField jTCost;
     private javax.swing.JTextField jTHDisk;
@@ -851,9 +843,9 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTextField jTPHouse;
     private javax.swing.JTextField jTPSpeed;
     private javax.swing.JTextField jTPYear;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTSubTotal;
+    private javax.swing.JTextField jTTotal;
+    private javax.swing.JTextField jTVAT;
     // End of variables declaration//GEN-END:variables
 }
 class Products{
