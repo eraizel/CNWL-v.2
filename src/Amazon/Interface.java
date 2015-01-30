@@ -3,6 +3,7 @@ package Amazon;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,21 +17,31 @@ import javax.swing.JOptionPane;
  */
 public class Interface extends javax.swing.JFrame {
     JList list;
+    
     int currentBook = 0;
     int currentSoftware = 0;
     Book[] bookList;
     Software[] softwareList;
     
+    
+    double subTotalB = 0;
+    double subTotalS = 0;
+    double vat = 0;
+    double total = 0;
     DefaultListModel dlmBook = new DefaultListModel();
     DefaultListModel dlmSoftware = new DefaultListModel();
     DefaultListModel dlmOrder = new DefaultListModel();
+    DefaultListModel dlmCost = new DefaultListModel();
+    
     /**
      * Creates new form Interface
      */
     
     public Interface() {
+        
         this.bookList = new Book [100];
         this.softwareList = new Software [100];
+        
         
         initComponents();
         
@@ -112,6 +123,7 @@ public class Interface extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListOrder = new javax.swing.JList();
+        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTSubTotal = new javax.swing.JTextField();
@@ -380,7 +392,7 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jLabelNumberOfPages))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "OTHERS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "STOCK", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jScrollPane1.setViewportView(jListBooks);
 
@@ -410,29 +422,29 @@ public class Interface extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(66, 66, 66)
                 .addComponent(jButtonBookOrder)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButtonSoftwareOrder)
                 .addGap(44, 44, 44))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonBookOrder)
                     .addComponent(jButtonSoftwareOrder))
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDER", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -444,6 +456,13 @@ public class Interface extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jListOrder);
 
+        jButton1.setText("Delete Item");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -452,11 +471,17 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
@@ -464,7 +489,7 @@ public class Interface extends javax.swing.JFrame {
 
         jLabel1.setText("Subtotal");
 
-        jLabel2.setText("VAT");
+        jLabel2.setText("VAT - 20%");
 
         jLabel3.setText("TOTAL");
 
@@ -479,7 +504,7 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTVAT, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                    .addComponent(jTVAT, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                     .addComponent(jTSubTotal)
                     .addComponent(jTTotal))
                 .addContainerGap())
@@ -546,9 +571,11 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jBSubmit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
+
+        jPanel2.getAccessibleContext().setAccessibleName("STOCK");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -606,7 +633,7 @@ public class Interface extends javax.swing.JFrame {
         jTMReq.setVisible(false);
         
         
-        Book b1 = new Book(1,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
+        //Book b1 = new Book(1,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
         
         
         
@@ -679,12 +706,15 @@ public class Interface extends javax.swing.JFrame {
                 int bNumberPages = Integer.parseInt(jTNPages.getText());
                 String bISBN = jTISBN.getText();
 
-                JOptionPane.showMessageDialog(null, "Book Added!");
+                
                 bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, 
                         bAuthor, bISBN, bNumberPages);
                 
-                dlmBook.addElement("Book "+(currentBook+1)+": "+bookList[currentBook].getProductName());        
+                dlmBook.addElement("Book "+(currentBook+1)+": "+
+                        bookList[currentBook].getProductName());        
                 jListBooks.setModel(dlmBook);
+                //JOptionPane.showMessageDialog(null, "Book Added!");
+                
                 currentBook++;
                 }catch(IllegalArgumentException e){
                     JOptionPane.showMessageDialog(null, "Error there is an empty"
@@ -704,8 +734,13 @@ public class Interface extends javax.swing.JFrame {
                     
                     softwareList[currentSoftware] = new Software(pID, pName, 
                             pCost, pYearPub, pPubHouse, sHardDisk, sProcSpeed, sMinRequirements);        
-                    dlmSoftware.addElement("Book "+(currentSoftware+1)+": "+softwareList[currentSoftware].getProductName());        
+                    dlmSoftware.addElement("Soft "+(currentSoftware+1)+": "+
+                            softwareList[currentSoftware].getProductName()+" Cost: "+softwareList[currentSoftware].getProductCost());
+                    
                     jListSoftware.setModel(dlmSoftware);
+                    
+                    
+                
                     currentSoftware++;
                 }
                 catch(IllegalArgumentException e ){
@@ -715,7 +750,7 @@ public class Interface extends javax.swing.JFrame {
                 
                 
                 }
-            JOptionPane.showMessageDialog(null, "Software Added!");
+            //JOptionPane.showMessageDialog(null, "Software Added!");
            
             
             }
@@ -750,20 +785,74 @@ public class Interface extends javax.swing.JFrame {
     private void jBSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSubmitActionPerformed
                 
     }//GEN-LAST:event_jBSubmitActionPerformed
-
+    
     private void jButtonBookOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookOrderActionPerformed
-        dlmOrder.addElement(jListBooks.getSelectedValue());        
+      
+        dlmOrder.addElement(jListBooks.getSelectedValue());
         jListOrder.setModel(dlmOrder);
+        subTotalB = bookList[jListBooks.getSelectedIndex()].getProductCost()+subTotalB;
+        //System.out.println(subTotalB+subTotalS);
+        jTSubTotal.setText(String.valueOf(subTotalB+subTotalS));
+        vat =  ((subTotalB+subTotalS)*0.20);
+        total = (subTotalB+subTotalS)+vat;
+        jTVAT.setText(String.valueOf(vat));
+        jTTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButtonBookOrderActionPerformed
 
     private void jButtonSoftwareOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSoftwareOrderActionPerformed
-        dlmOrder.addElement(jListSoftware.getSelectedValue());        
+        
+        dlmOrder.addElement(jListSoftware.getSelectedValue());
         jListOrder.setModel(dlmOrder);
+        subTotalS = softwareList[jListSoftware.getSelectedIndex()].getProductCost()+subTotalS;
+        //System.out.println(subTotalS+subTotalB);
+        jTSubTotal.setText(String.valueOf(subTotalS+subTotalB));
+        vat =  ((subTotalB+subTotalS)*0.20);
+        total = (subTotalB+subTotalS)+vat;
+        jTVAT.setText(String.valueOf(vat));
+        jTTotal.setText(String.valueOf(total));
     }//GEN-LAST:event_jButtonSoftwareOrderActionPerformed
 
     private void jListOrderValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListOrderValueChanged
-        jTSubTotal.Integer.parseInt(setText());
+       
+        
+        
     }//GEN-LAST:event_jListOrderValueChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        double textS = bookList[jListOrder.getSelectedIndex()].getProductCost();
+        String STB = jListOrder.getSelectedValue().toString();
+        if (STB.contains("B")){
+            System.out.print("\nBOOK");
+        }
+        if (STB.contains("S")){
+        
+            System.out.print("\nSOFTAWARE");
+        }
+            
+        //System.out.print("\nSof="+textS);
+        //System.out.print("\nSof="+STB);
+        dlmOrder.removeElement(jListOrder.getSelectedValue());
+        
+        
+//        System.out.print("\nSof="+subTotalS);
+//        System.out.print("\nBooks="+ subTotalB);
+//        System.out.print("\n=====Books========");
+//        System.out.print(subTotalB - bookList[jListOrder.getSelectedIndex()].getProductCost());
+//        System.out.print("\n=====Software============");
+//        System.out.print(subTotalS - softwareList[jListOrder.getSelectedIndex()].getProductCost());
+//        
+        //try{
+        //    subTotalS = subTotalS - bookList[jListOrder.getSelectedIndex()].getProductCost();
+        //}catch(Exception e){
+        //    
+        //}
+        ///try{
+        //    subTotalB = subTotalB - softwareList[jListOrder.getSelectedIndex()].getProductCost();
+        //}catch(Exception e){
+        //    
+        //}
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -804,6 +893,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JButton jBBooks;
     private javax.swing.JButton jBSoftware;
     private javax.swing.JButton jBSubmit;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBookOrder;
     private javax.swing.JButton jButtonSoftwareOrder;
     private javax.swing.JLabel jLAuthor;
@@ -869,7 +959,11 @@ class Products{
 }    
     // Products Setters
     public void setProductID(int pID){
-        this.pID=pID;   
+        int counter = 1;
+        for (int i=0;i<counter;i++ ){
+        this.pID=(pID)+counter;
+        }
+           
     }
     public void setProductName(String pName){
         this.pName=pName;
