@@ -17,11 +17,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Interface extends javax.swing.JFrame {
     JList list;
-    
+    int bookId = 1;
+    int softwareId = 1;
+    int clientId = 1;
     int currentBook = 0;
     int currentSoftware = 0;
+    int currentOrder = 0;
     Book[] bookList;
     Software[] softwareList;
+    Order[] orderList;
     
     
     double subTotalB = 0;
@@ -41,6 +45,7 @@ public class Interface extends javax.swing.JFrame {
         
         this.bookList = new Book [100];
         this.softwareList = new Software [100];
+        this.orderList = new Order [100];
         
         
         initComponents();
@@ -48,8 +53,9 @@ public class Interface extends javax.swing.JFrame {
         //Products p1 = new Products(1,"Microsoft Office",99.99,2014,"Microsoft");
         //Book b1 = new Book(1,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
         //Software s1 = new Software(1,"Microsoft Office",99.99,2014,"Microsoft",500, 2.2, "Windows 7");
-        
+        //Button:
         jBSubmit.setVisible(false);
+        //Product:
         jLID.setVisible(false);
         jTID.setVisible(false);
         jLName.setVisible(false);
@@ -60,18 +66,31 @@ public class Interface extends javax.swing.JFrame {
         jTPYear.setVisible(false);
         jLCost.setVisible(false);
         jTCost.setVisible(false);
+        //Book:
         jLAuthor.setVisible(false);
         jTAuthor.setVisible(false);
         jLNPages.setVisible(false);
         jTNPages.setVisible(false);
         jLISBN.setVisible(false);
         jTISBN.setVisible(false);
+        //Software:
         jLHDisk.setVisible(false);
         jTHDisk.setVisible(false);
         jLPSpeed.setVisible(false);
         jTPSpeed.setVisible(false);
         jLMReq.setVisible(false);
         jTMReq.setVisible(false);
+        //Client:
+        jLOID.setVisible(false);
+        jTOID.setVisible(false);
+        jLClientName.setVisible(false);
+        jTClientName.setVisible(false);
+        jLAddress.setVisible(false);
+        jTAddress.setVisible(false);
+        jLPhoneNumber.setVisible(false);
+        jTPhoneNumber.setVisible(false);
+        jLEmail.setVisible(false);
+        jTEmail.setVisible(false);
         
         
         
@@ -89,6 +108,7 @@ public class Interface extends javax.swing.JFrame {
         jPOptions = new javax.swing.JPanel();
         jBBooks = new javax.swing.JButton();
         jBSoftware = new javax.swing.JButton();
+        jBClient = new javax.swing.JButton();
         jPGroups = new javax.swing.JPanel();
         jLName = new javax.swing.JLabel();
         jTName = new javax.swing.JTextField();
@@ -113,6 +133,16 @@ public class Interface extends javax.swing.JFrame {
         jTPSpeed = new javax.swing.JTextField();
         jLMReq = new javax.swing.JLabel();
         jTMReq = new javax.swing.JTextField();
+        jLOID = new javax.swing.JLabel();
+        jTOID = new javax.swing.JTextField();
+        jLClientName = new javax.swing.JLabel();
+        jTClientName = new javax.swing.JTextField();
+        jLAddress = new javax.swing.JLabel();
+        jTAddress = new javax.swing.JTextField();
+        jLPhoneNumber = new javax.swing.JLabel();
+        jTPhoneNumber = new javax.swing.JTextField();
+        jLEmail = new javax.swing.JLabel();
+        jTEmail = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListBooks = new javax.swing.JList();
@@ -124,6 +154,8 @@ public class Interface extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jListOrder = new javax.swing.JList();
         jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLCostumer = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTSubTotal = new javax.swing.JTextField();
@@ -165,12 +197,27 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jBClient.setText("Client");
+        jBClient.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jBClient.setBorderPainted(false);
+        jBClient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBClientMouseClicked(evt);
+            }
+        });
+        jBClient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBClientActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPOptionsLayout = new javax.swing.GroupLayout(jPOptions);
         jPOptions.setLayout(jPOptionsLayout);
         jPOptionsLayout.setHorizontalGroup(
             jPOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jBBooks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
             .addComponent(jBSoftware, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jBClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPOptionsLayout.setVerticalGroup(
             jPOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,10 +226,12 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jBBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSoftware, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBClient, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPGroups.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "GROUPS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPGroups.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ADD NEW CLIENTS / PRODUCTS", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
         jPGroups.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentHidden(java.awt.event.ComponentEvent evt) {
                 jPGroupsComponentHidden(evt);
@@ -286,6 +335,46 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jLOID.setText("OID:");
+
+        jTOID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTOIDActionPerformed(evt);
+            }
+        });
+
+        jLClientName.setText("Client Name:");
+
+        jTClientName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTClientNameActionPerformed(evt);
+            }
+        });
+
+        jLAddress.setText("Address:");
+
+        jTAddress.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTAddressActionPerformed(evt);
+            }
+        });
+
+        jLPhoneNumber.setText("Phone Number:");
+
+        jTPhoneNumber.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTPhoneNumberActionPerformed(evt);
+            }
+        });
+
+        jLEmail.setText("Email:");
+
+        jTEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTEmailActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPGroupsLayout = new javax.swing.GroupLayout(jPGroups);
         jPGroups.setLayout(jPGroupsLayout);
         jPGroupsLayout.setHorizontalGroup(
@@ -306,29 +395,6 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTPHouse))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLPYear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTPYear))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLCost)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTCost))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLAuthor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTAuthor))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLNPages)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTNPages))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLabelNumberOfPages)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLISBN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTISBN))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLHDisk)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTHDisk))
@@ -339,12 +405,56 @@ public class Interface extends javax.swing.JFrame {
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLMReq)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTMReq)))
-                .addGap(18, 18, 18))
+                        .addComponent(jTMReq))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLAuthor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTAuthor))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLNPages)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTNPages, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLISBN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTISBN))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLOID)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTOID, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLClientName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTClientName))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelNumberOfPages)
+                            .addGroup(jPGroupsLayout.createSequentialGroup()
+                                .addComponent(jLPYear)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTPYear)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLCost)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTCost, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLPhoneNumber)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLEmail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTEmail))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLAddress)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTAddress)))
+                .addContainerGap())
         );
         jPGroupsLayout.setVerticalGroup(
             jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPGroupsLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLID)
                     .addComponent(jTID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -359,21 +469,17 @@ public class Interface extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLPYear)
-                    .addComponent(jTPYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTPYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCost)
                     .addComponent(jTCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLAuthor)
                     .addComponent(jTAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNPages)
-                    .addComponent(jTNPages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTNPages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLISBN)
                     .addComponent(jTISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -389,10 +495,26 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLMReq)
                     .addComponent(jTMReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLOID)
+                    .addComponent(jTOID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLClientName)
+                    .addComponent(jTClientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLAddress)
+                    .addComponent(jTAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLPhoneNumber)
+                    .addComponent(jTPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLEmail)
+                    .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
                 .addComponent(jLabelNumberOfPages))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "STOCK", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INVENTORY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jScrollPane1.setViewportView(jListBooks);
 
@@ -422,32 +544,34 @@ public class Interface extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jButtonBookOrder)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonSoftwareOrder)
-                .addGap(44, 44, 44))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(jButtonBookOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(104, 104, 104)
+                        .addComponent(jButtonSoftwareOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(49, 49, 49))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonBookOrder)
-                    .addComponent(jButtonSoftwareOrder))
-                .addGap(0, 11, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSoftwareOrder)
+                    .addComponent(jButtonBookOrder))
+                .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDER", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDER SUMARY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jListOrder.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -463,26 +587,37 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Costumer:");
+
+        jLCostumer.setText("No name");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLCostumer)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane3)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLCostumer))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -504,9 +639,11 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTVAT, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
-                    .addComponent(jTSubTotal)
-                    .addComponent(jTTotal))
+                    .addComponent(jTVAT)
+                    .addComponent(jTTotal)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jTSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -523,7 +660,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jBSubmit.setText("Submit Book");
@@ -547,32 +684,35 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jPGroups, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
-                        .addComponent(jBSubmit)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(181, 181, 181)
+                        .addComponent(jBSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jBSubmit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBSubmit)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel2.getAccessibleContext().setAccessibleName("STOCK");
@@ -605,10 +745,15 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jTCostActionPerformed
 
     private void jBBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBBooksMouseClicked
-        // TODO add your handling code here:
+        //Set Values:
+        jTID.setText(String.valueOf(bookId));
+        // Button
         jPGroups.setVisible(true);
-        jBSubmit.setText("  Submit Book  ");    
+        ((javax.swing.border.TitledBorder) jPGroups.getBorder()).setTitle("ADD BOOK");
+        jPGroups.repaint();
+        jBSubmit.setText("Submit Book");    
         jBSubmit.setVisible(true);
+        // Products:
         jLID.setVisible(true);
         jTID.setVisible(true);
         jLName.setVisible(true);
@@ -619,18 +764,31 @@ public class Interface extends javax.swing.JFrame {
         jTPYear.setVisible(true);
         jLCost.setVisible(true);
         jTCost.setVisible(true);
+        //Books:
         jLAuthor.setVisible(true);
         jTAuthor.setVisible(true);
         jLNPages.setVisible(true);
         jTNPages.setVisible(true);
         jLISBN.setVisible(true);
         jTISBN.setVisible(true);
+        //Software:
         jLHDisk.setVisible(false);
         jTHDisk.setVisible(false);
         jLPSpeed.setVisible(false);
         jTPSpeed.setVisible(false);
         jLMReq.setVisible(false);
         jTMReq.setVisible(false);
+        //Client:
+        jLOID.setVisible(false);
+        jTOID.setVisible(false);
+        jLClientName.setVisible(false);
+        jTClientName.setVisible(false);
+        jLAddress.setVisible(false);
+        jTAddress.setVisible(false);
+        jLPhoneNumber.setVisible(false);
+        jTPhoneNumber.setVisible(false);
+        jLEmail.setVisible(false);
+        jTEmail.setVisible(false);
         
         
         //Book b1 = new Book(1,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
@@ -642,20 +800,21 @@ public class Interface extends javax.swing.JFrame {
 
     private void jBSoftwareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBSoftwareMouseClicked
 
-        // TODO add your handling code here:
+        //Button:
+        jTID.setText(String.valueOf(softwareId));
         jPGroups.setVisible(true);
+        ((javax.swing.border.TitledBorder) jPGroups.getBorder()).setTitle("ADD SOFTWARE");
+        jPGroups.repaint();
         jBSubmit.setText("Submit Software");
-        
-        
-        jBSubmit.setVisible(true);
-        
-       
+        jBSubmit.setVisible(true);  
+        //Book:
         jLAuthor.setVisible(false);
         jTAuthor.setVisible(false);
         jLNPages.setVisible(false);
         jTNPages.setVisible(false);
         jLISBN.setVisible(false);
         jTISBN.setVisible(false);
+        //Product:
         jLID.setVisible(true);
         jTID.setVisible(true);
         jLName.setVisible(true);
@@ -666,13 +825,24 @@ public class Interface extends javax.swing.JFrame {
         jTPYear.setVisible(true);
         jLCost.setVisible(true);
         jTCost.setVisible(true);
+        //Software:
         jLHDisk.setVisible(true);
         jTHDisk.setVisible(true);
         jLPSpeed.setVisible(true);
         jTPSpeed.setVisible(true);
         jLMReq.setVisible(true);
         jTMReq.setVisible(true);
-        //Software s1 = new Software(1,"Microsoft Office",99.99,2014,"Microsoft",500, 2.2, "Windows 7");
+        //Client:
+        jLOID.setVisible(false);
+        jTOID.setVisible(false);
+        jLClientName.setVisible(false);
+        jTClientName.setVisible(false);
+        jLAddress.setVisible(false);
+        jTAddress.setVisible(false);
+        jLPhoneNumber.setVisible(false);
+        jTPhoneNumber.setVisible(false);
+        jLEmail.setVisible(false);
+        jTEmail.setVisible(false);
     }//GEN-LAST:event_jBSoftwareMouseClicked
 
     private void jPGroupsComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPGroupsComponentHidden
@@ -694,7 +864,7 @@ public class Interface extends javax.swing.JFrame {
     private void jBSubmitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBSubmitMouseClicked
         //Book b1 = new Book(001,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
         
-            if (evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("  Submit Book  ")){
+            if (evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("Submit Book")){
             
                 try{
                 int pID = Integer.parseInt(jTID.getText());
@@ -705,22 +875,20 @@ public class Interface extends javax.swing.JFrame {
                 String bAuthor = jTAuthor.getText();
                 int bNumberPages = Integer.parseInt(jTNPages.getText());
                 String bISBN = jTISBN.getText();
-
-                
                 bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, 
                         bAuthor, bISBN, bNumberPages);
-                
                 dlmBook.addElement("Book "+(currentBook+1)+": "+
                         bookList[currentBook].getProductName());        
                 jListBooks.setModel(dlmBook);
-                //JOptionPane.showMessageDialog(null, "Book Added!");
-                
                 currentBook++;
+                bookId++;
+                jTID.setText(String.valueOf(bookId));
                 }catch(IllegalArgumentException e){
                     JOptionPane.showMessageDialog(null, "Error there is an empty"
                             + " field, please complete all fields before clicking submit");
                 }
-        } else {
+        } 
+            if(evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("Submit Software")) {
                 
                 try{
                     int pID = Integer.parseInt(jTID.getText());
@@ -731,35 +899,34 @@ public class Interface extends javax.swing.JFrame {
                     int sHardDisk = Integer.parseInt(jTHDisk.getText());
                     double sProcSpeed = Double.parseDouble(jTPSpeed.getText());
                     String sMinRequirements = jTMReq.getText();
-                    
                     softwareList[currentSoftware] = new Software(pID, pName, 
                             pCost, pYearPub, pPubHouse, sHardDisk, sProcSpeed, sMinRequirements);        
                     dlmSoftware.addElement("Soft "+(currentSoftware+1)+": "+
-                            softwareList[currentSoftware].getProductName()+" Cost: "+softwareList[currentSoftware].getProductCost());
-                    
+                            softwareList[currentSoftware].getProductName());
                     jListSoftware.setModel(dlmSoftware);
-                    
-                    
-                
                     currentSoftware++;
-                }
-                catch(IllegalArgumentException e ){
-                    JOptionPane.showMessageDialog(null, "Error there is an empty"
-                            + " field, please complete all fields before clicking submit");
-                    
-                
-                
-                }
-            //JOptionPane.showMessageDialog(null, "Software Added!");
-           
-            
+                    softwareId++;
+                    jTID.setText(String.valueOf(softwareId));
+                }catch(IllegalArgumentException e ){
             }
-        
-        
-        
-        
-        
-        
+        }
+        if(evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("Add Client")) {
+             
+            try{
+                int oID = Integer.parseInt(jTOID.getText());
+                String cName = jTClientName.getText();
+                String cAddress = jTAddress.getText();
+                int cPhoneNumber = Integer.parseInt(jTPhoneNumber.getText());
+                String cEmail = jTEmail.getText();
+                orderList[currentOrder] = new Order(oID, cName, cAddress, cPhoneNumber, cEmail);               
+                jLCostumer.setText(orderList[currentOrder].getClientName());                        
+                currentOrder++;
+                clientId++;
+                jTOID.setText(String.valueOf(clientId));
+                }catch(IllegalArgumentException e){
+                    
+                }
+        }
     }//GEN-LAST:event_jBSubmitMouseClicked
 
     private void jPGroupsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPGroupsAncestorAdded
@@ -819,14 +986,27 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jListOrderValueChanged
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        double textS = bookList[jListOrder.getSelectedIndex()].getProductCost();
+        
         String STB = jListOrder.getSelectedValue().toString();
         if (STB.contains("B")){
-            System.out.print("\nBOOK");
+            //
+            subTotalB = (subTotalB - bookList[jListOrder.getSelectedIndex()].getProductCost());
+            jTSubTotal.setText(String.valueOf(subTotalB+subTotalS));
+            vat =  ((subTotalB+subTotalS)*0.20);
+            total = (subTotalB+subTotalS)+vat;
+            jTVAT.setText(String.valueOf(vat));
+            jTTotal.setText(String.valueOf(total));
+            
         }
         if (STB.contains("S")){
         
-            System.out.print("\nSOFTAWARE");
+            //
+            subTotalS = (subTotalS - softwareList[jListOrder.getSelectedIndex()].getProductCost());
+            jTSubTotal.setText(String.valueOf(subTotalS+subTotalB));
+            vat =  ((subTotalB+subTotalS)*0.20);
+            total = (subTotalB+subTotalS)+vat;
+            jTVAT.setText(String.valueOf(vat));
+            jTTotal.setText(String.valueOf(total));
         }
             
         //System.out.print("\nSof="+textS);
@@ -853,6 +1033,76 @@ public class Interface extends javax.swing.JFrame {
         //}
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jBClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBClientMouseClicked
+        //Button:
+        jPGroups.setVisible(true);
+        jTOID.setText(String.valueOf(clientId));
+        ((javax.swing.border.TitledBorder) jPGroups.getBorder()).setTitle("ADD CLIENT");
+        jPGroups.repaint();
+        jBSubmit.setText("Add Client");
+        jBSubmit.setVisible(true);  
+        //Book:
+        jLAuthor.setVisible(false);
+        jTAuthor.setVisible(false);
+        jLNPages.setVisible(false);
+        jTNPages.setVisible(false);
+        jLISBN.setVisible(false);
+        jTISBN.setVisible(false);
+        //Product:
+        jLID.setVisible(false);
+        jTID.setVisible(false);
+        jLName.setVisible(false);
+        jTName.setVisible(false);
+        jLPHouse.setVisible(false);
+        jTPHouse.setVisible(false);
+        jLPYear.setVisible(false);
+        jTPYear.setVisible(false);
+        jLCost.setVisible(false);
+        jTCost.setVisible(false);
+        //Software:
+        jLHDisk.setVisible(false);
+        jTHDisk.setVisible(false);
+        jLPSpeed.setVisible(false);
+        jTPSpeed.setVisible(false);
+        jLMReq.setVisible(false);
+        jTMReq.setVisible(false);
+        //Client:
+        jLOID.setVisible(true);
+        jTOID.setVisible(true);
+        jLClientName.setVisible(true);
+        jTClientName.setVisible(true);
+        jLAddress.setVisible(true);
+        jTAddress.setVisible(true);
+        jLPhoneNumber.setVisible(true);
+        jTPhoneNumber.setVisible(true);
+        jLEmail.setVisible(true);
+        jTEmail.setVisible(true);
+    }//GEN-LAST:event_jBClientMouseClicked
+
+    private void jBClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClientActionPerformed
+
+    }//GEN-LAST:event_jBClientActionPerformed
+
+    private void jTOIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTOIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTOIDActionPerformed
+
+    private void jTClientNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTClientNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTClientNameActionPerformed
+
+    private void jTAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTAddressActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTAddressActionPerformed
+
+    private void jTPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPhoneNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTPhoneNumberActionPerformed
+
+    private void jTEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTEmailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -891,25 +1141,33 @@ public class Interface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBooks;
+    private javax.swing.JButton jBClient;
     private javax.swing.JButton jBSoftware;
     private javax.swing.JButton jBSubmit;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBookOrder;
     private javax.swing.JButton jButtonSoftwareOrder;
+    private javax.swing.JLabel jLAddress;
     private javax.swing.JLabel jLAuthor;
+    private javax.swing.JLabel jLClientName;
     private javax.swing.JLabel jLCost;
+    private javax.swing.JLabel jLCostumer;
+    private javax.swing.JLabel jLEmail;
     private javax.swing.JLabel jLHDisk;
     private javax.swing.JLabel jLID;
     private javax.swing.JLabel jLISBN;
     private javax.swing.JLabel jLMReq;
     private javax.swing.JLabel jLNPages;
     private javax.swing.JLabel jLName;
+    private javax.swing.JLabel jLOID;
     private javax.swing.JLabel jLPHouse;
     private javax.swing.JLabel jLPSpeed;
     private javax.swing.JLabel jLPYear;
+    private javax.swing.JLabel jLPhoneNumber;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelNumberOfPages;
     private javax.swing.JList jListBooks;
     private javax.swing.JList jListOrder;
@@ -922,17 +1180,22 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTAddress;
     private javax.swing.JTextField jTAuthor;
+    private javax.swing.JTextField jTClientName;
     private javax.swing.JTextField jTCost;
+    private javax.swing.JTextField jTEmail;
     private javax.swing.JTextField jTHDisk;
     private javax.swing.JTextField jTID;
     private javax.swing.JTextField jTISBN;
     private javax.swing.JTextField jTMReq;
     private javax.swing.JTextField jTNPages;
     private javax.swing.JTextField jTName;
+    private javax.swing.JTextField jTOID;
     private javax.swing.JTextField jTPHouse;
     private javax.swing.JTextField jTPSpeed;
     private javax.swing.JTextField jTPYear;
+    private javax.swing.JTextField jTPhoneNumber;
     private javax.swing.JTextField jTSubTotal;
     private javax.swing.JTextField jTTotal;
     private javax.swing.JTextField jTVAT;
@@ -959,17 +1222,15 @@ class Products{
 }    
     // Products Setters
     public void setProductID(int pID){
-        int counter = 1;
-        for (int i=0;i<counter;i++ ){
-        this.pID=(pID)+counter;
-        }
-           
+        this.pID=pID;      
     }
     public void setProductName(String pName){
         this.pName=pName;
+        
     }
     public void setProductCost(double pCost){
         this.pCost=pCost;
+       
     }
     public void setProductYearPublication(int pYearPub){
         this.pYearPub=pYearPub;
