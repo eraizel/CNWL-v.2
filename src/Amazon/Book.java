@@ -1,5 +1,7 @@
 package Amazon;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author eraizel
@@ -27,13 +29,26 @@ class Book extends Products{
 
     //setters for Books
     public void setBookAuthor(String bAuthor){
+        if (!bAuthor.equals(""))
         this.bAuthor=bAuthor;
+        else {
+            JOptionPane.showMessageDialog(null, "The name of the Author\n"
+                + "cannot be empty!");
+        }
+        
     }
     public void setBookISBN(String bISBN){
         this.bISBN=bISBN;
     }
-    public void setNumberPages(int bNumberPages){
+    public void setNumberPages(int bNumberPages, int check){
+        
+        if (check>10){
         this.bNumberPages=bNumberPages;
+        }
+        else{
+        JOptionPane.showMessageDialog(null, "Please enter a valid number of pages\n"
+                + "must be greater than 10 pages");
+        }
     }
     
     // getters for Books
