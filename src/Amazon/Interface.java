@@ -26,7 +26,7 @@ public class Interface extends javax.swing.JFrame {
     Book[] bookList;
     Software[] softwareList;
     Order[] orderList;
-    
+    private static boolean conditionsCheck = true;
     
     double subTotalB = 0;
     double subTotalS = 0;
@@ -109,6 +109,7 @@ public class Interface extends javax.swing.JFrame {
         jBBooks = new javax.swing.JButton();
         jBSoftware = new javax.swing.JButton();
         jBClient = new javax.swing.JButton();
+        jBOrders = new javax.swing.JButton();
         jPGroups = new javax.swing.JPanel();
         jLName = new javax.swing.JLabel();
         jTName = new javax.swing.JTextField();
@@ -143,6 +144,8 @@ public class Interface extends javax.swing.JFrame {
         jTPhoneNumber = new javax.swing.JTextField();
         jLEmail = new javax.swing.JLabel();
         jTEmail = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTableOrders = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListBooks = new javax.swing.JList();
@@ -182,6 +185,11 @@ public class Interface extends javax.swing.JFrame {
                 jBBooksComponentShown(evt);
             }
         });
+        jBBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBBooksActionPerformed(evt);
+            }
+        });
 
         jBSoftware.setText("Software");
         jBSoftware.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
@@ -211,6 +219,20 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jBOrders.setText("Orders");
+        jBOrders.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED)));
+        jBOrders.setBorderPainted(false);
+        jBOrders.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jBOrdersMouseClicked(evt);
+            }
+        });
+        jBOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBOrdersActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPOptionsLayout = new javax.swing.GroupLayout(jPOptions);
         jPOptions.setLayout(jPOptionsLayout);
         jPOptionsLayout.setHorizontalGroup(
@@ -218,6 +240,7 @@ public class Interface extends javax.swing.JFrame {
             .addComponent(jBBooks, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
             .addComponent(jBSoftware, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jBClient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jBOrders, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPOptionsLayout.setVerticalGroup(
             jPOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,6 +251,8 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jBSoftware, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBClient, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBOrders, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -375,6 +400,16 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
+        jTableOrders.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane5.setViewportView(jTableOrders);
+
         javax.swing.GroupLayout jPGroupsLayout = new javax.swing.GroupLayout(jPGroups);
         jPGroups.setLayout(jPGroupsLayout);
         jPGroupsLayout.setHorizontalGroup(
@@ -382,42 +417,11 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPGroupsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5)
                     .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTName))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTID))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLPHouse)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTPHouse))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLHDisk)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTHDisk))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLPSpeed)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTPSpeed))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLMReq)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTMReq))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLAuthor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTAuthor))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLNPages)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTNPages, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLAddress)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLISBN)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTISBN))
+                        .addComponent(jTAddress))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLOID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -427,28 +431,62 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTClientName))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLMReq)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTMReq))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLPSpeed)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTPSpeed))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLHDisk)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTHDisk))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
+                        .addComponent(jLNPages)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTNPages, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLISBN)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTISBN))
+                    .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelNumberOfPages)
                             .addGroup(jPGroupsLayout.createSequentialGroup()
-                                .addComponent(jLPYear)
+                                .addComponent(jLPhoneNumber)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTPYear)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLCost)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTCost, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jTPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLEmail)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTEmail))
+                            .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPGroupsLayout.createSequentialGroup()
+                                    .addComponent(jLPYear)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTPYear, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLCost)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTCost))
+                                .addComponent(jLabelNumberOfPages)
+                                .addGroup(jPGroupsLayout.createSequentialGroup()
+                                    .addComponent(jLPHouse)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTPHouse))
+                                .addGroup(jPGroupsLayout.createSequentialGroup()
+                                    .addComponent(jLID)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTID, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jLName)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLPhoneNumber)
+                        .addComponent(jLAuthor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLEmail)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTEmail))
-                    .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addComponent(jLAddress)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTAddress)))
+                        .addComponent(jTAuthor)))
                 .addContainerGap())
         );
         jPGroupsLayout.setVerticalGroup(
@@ -457,9 +495,7 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLID)
-                    .addComponent(jTID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLName)
                     .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -472,7 +508,7 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jTPYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLCost)
                     .addComponent(jTCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLAuthor)
                     .addComponent(jTAuthor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -480,8 +516,8 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLNPages)
                     .addComponent(jTNPages, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLISBN)
-                    .addComponent(jTISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLISBN))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLHDisk)
@@ -490,7 +526,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLPSpeed)
                     .addComponent(jTPSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLMReq)
                     .addComponent(jTMReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -510,7 +546,9 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jTPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLEmail)
                     .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(79, 79, 79)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabelNumberOfPages))
         );
 
@@ -603,9 +641,12 @@ public class Interface extends javax.swing.JFrame {
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLCostumer)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(66, 66, 66))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -614,10 +655,10 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLCostumer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TOTAL", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -641,9 +682,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTVAT)
                     .addComponent(jTTotal)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jTSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTSubTotal, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -683,31 +722,30 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jPOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPGroups, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(181, 181, 181)
-                        .addComponent(jBSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPGroups, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBSubmit)))
-                .addGap(18, 18, 18)
+                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBSubmit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -723,26 +761,6 @@ public class Interface extends javax.swing.JFrame {
     private void jBSoftwareActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSoftwareActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBSoftwareActionPerformed
-
-    private void jTNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTNameActionPerformed
-
-    private void jTIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTIDActionPerformed
-
-    private void jTPHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPHouseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPHouseActionPerformed
-
-    private void jTPYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPYearActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPYearActionPerformed
-
-    private void jTCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCostActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTCostActionPerformed
 
     private void jBBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBBooksMouseClicked
         //Set Values:
@@ -789,6 +807,8 @@ public class Interface extends javax.swing.JFrame {
         jTPhoneNumber.setVisible(false);
         jLEmail.setVisible(false);
         jTEmail.setVisible(false);
+        //Table
+        jTableOrders.setVisible(false);
         
         
         //Book b1 = new Book(1,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
@@ -843,19 +863,9 @@ public class Interface extends javax.swing.JFrame {
         jTPhoneNumber.setVisible(false);
         jLEmail.setVisible(false);
         jTEmail.setVisible(false);
+        //Table
+        jTableOrders.setVisible(false);
     }//GEN-LAST:event_jBSoftwareMouseClicked
-
-    private void jPGroupsComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPGroupsComponentHidden
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPGroupsComponentHidden
-
-    private void jTNPagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNPagesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTNPagesActionPerformed
-
-    private void jTISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTISBNActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTISBNActionPerformed
 
     private void jBBooksComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBBooksComponentShown
         // TODO add your handling code here:
@@ -877,12 +887,25 @@ public class Interface extends javax.swing.JFrame {
                 String bISBN = jTISBN.getText();
                 bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, 
                         bAuthor, bISBN, bNumberPages);
-                dlmBook.addElement("Book "+(currentBook+1)+": "+
-                        bookList[currentBook].getProductName());        
-                jListBooks.setModel(dlmBook);
-                currentBook++;
-                bookId++;
-                jTID.setText(String.valueOf(bookId));
+                               
+                if (conditionsCheck && bAuthor.equals("")){                    
+                    bookList[currentBook].setBookAuthor(bAuthor);                    
+                }
+                else if (conditionsCheck && bNumberPages<=10){
+                    bookList[currentBook].setNumberPages(bNumberPages,bNumberPages); 
+                }
+                else{
+                    
+                    dlmBook.addElement("Book "+(currentBook+1)+": "+
+                        bookList[currentBook].getProductName());
+                    jListBooks.setModel(dlmBook);
+                    currentBook++;
+                    bookId++;
+                    jTID.setText(String.valueOf(bookId));
+                
+                }
+                
+
                 }catch(IllegalArgumentException e){
                     JOptionPane.showMessageDialog(null, "Error there is an empty"
                             + " field, please complete all fields before clicking submit");
@@ -928,26 +951,6 @@ public class Interface extends javax.swing.JFrame {
                 }
         }
     }//GEN-LAST:event_jBSubmitMouseClicked
-
-    private void jPGroupsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPGroupsAncestorAdded
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jPGroupsAncestorAdded
-
-    private void test(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_test
-        // TODO add your handling code here:
-    }//GEN-LAST:event_test
-
-    private void jTHDiskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTHDiskActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTHDiskActionPerformed
-
-    private void jTPSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPSpeedActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTPSpeedActionPerformed
-
-    private void jTMReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTMReqActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTMReqActionPerformed
 
     private void jBSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBSubmitActionPerformed
                 
@@ -996,6 +999,7 @@ public class Interface extends javax.swing.JFrame {
             total = (subTotalB+subTotalS)+vat;
             jTVAT.setText(String.valueOf(vat));
             jTTotal.setText(String.valueOf(total));
+            dlmOrder.removeElement(jListOrder.getSelectedValue());
             
         }
         if (STB.contains("S")){
@@ -1007,11 +1011,12 @@ public class Interface extends javax.swing.JFrame {
             total = (subTotalB+subTotalS)+vat;
             jTVAT.setText(String.valueOf(vat));
             jTTotal.setText(String.valueOf(total));
+            dlmOrder.removeElement(jListOrder.getSelectedValue());
         }
             
         //System.out.print("\nSof="+textS);
         //System.out.print("\nSof="+STB);
-        dlmOrder.removeElement(jListOrder.getSelectedValue());
+        
         
         
 //        System.out.print("\nSof="+subTotalS);
@@ -1078,31 +1083,141 @@ public class Interface extends javax.swing.JFrame {
         jTPhoneNumber.setVisible(true);
         jLEmail.setVisible(true);
         jTEmail.setVisible(true);
+        //Table
+        jTableOrders.setVisible(false);
     }//GEN-LAST:event_jBClientMouseClicked
 
     private void jBClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClientActionPerformed
 
     }//GEN-LAST:event_jBClientActionPerformed
 
-    private void jTOIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTOIDActionPerformed
+    private void jBOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBOrdersMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTOIDActionPerformed
+    }//GEN-LAST:event_jBOrdersMouseClicked
 
-    private void jTClientNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTClientNameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTClientNameActionPerformed
+    private void jBOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdersActionPerformed
+        //Button:
+        jPGroups.setVisible(true);
+        jTOID.setText(String.valueOf(clientId));
+        ((javax.swing.border.TitledBorder) jPGroups.getBorder()).setTitle("VIEW ORDERS");
+        jPGroups.repaint();
+        jBSubmit.setText("Dispach");
+        jBSubmit.setVisible(true);  
+        //Book:
+        jLAuthor.setVisible(false);
+        jTAuthor.setVisible(false);
+        jLNPages.setVisible(false);
+        jTNPages.setVisible(false);
+        jLISBN.setVisible(false);
+        jTISBN.setVisible(false);
+        //Product:
+        jLID.setVisible(false);
+        jTID.setVisible(false);
+        jLName.setVisible(false);
+        jTName.setVisible(false);
+        jLPHouse.setVisible(false);
+        jTPHouse.setVisible(false);
+        jLPYear.setVisible(false);
+        jTPYear.setVisible(false);
+        jLCost.setVisible(false);
+        jTCost.setVisible(false);
+        //Software:
+        jLHDisk.setVisible(false);
+        jTHDisk.setVisible(false);
+        jLPSpeed.setVisible(false);
+        jTPSpeed.setVisible(false);
+        jLMReq.setVisible(false);
+        jTMReq.setVisible(false);
+        //Client:
+        jLOID.setVisible(false);
+        jTOID.setVisible(false);
+        jLClientName.setVisible(false);
+        jTClientName.setVisible(false);
+        jLAddress.setVisible(false);
+        jTAddress.setVisible(false);
+        jLPhoneNumber.setVisible(false);
+        jTPhoneNumber.setVisible(false);
+        jLEmail.setVisible(false);
+        jTEmail.setVisible(false);
+        //Table
+        jTableOrders.setVisible(true);
+    }//GEN-LAST:event_jBOrdersActionPerformed
 
-    private void jTAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTAddressActionPerformed
+    private void jPGroupsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPGroupsAncestorAdded
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTAddressActionPerformed
+    }//GEN-LAST:event_jPGroupsAncestorAdded
+
+    private void jPGroupsComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPGroupsComponentHidden
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jPGroupsComponentHidden
+
+    private void jTEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTEmailActionPerformed
 
     private void jTPhoneNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPhoneNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTPhoneNumberActionPerformed
 
-    private void jTEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTEmailActionPerformed
+    private void jTAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTAddressActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTEmailActionPerformed
+    }//GEN-LAST:event_jTAddressActionPerformed
+
+    private void jTClientNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTClientNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTClientNameActionPerformed
+
+    private void jTOIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTOIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTOIDActionPerformed
+
+    private void jTMReqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTMReqActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTMReqActionPerformed
+
+    private void jTPSpeedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPSpeedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTPSpeedActionPerformed
+
+    private void jTHDiskActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTHDiskActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTHDiskActionPerformed
+
+    private void jTISBNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTISBNActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTISBNActionPerformed
+
+    private void jTNPagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNPagesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNPagesActionPerformed
+
+    private void test(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_test
+        // TODO add your handling code here:
+    }//GEN-LAST:event_test
+
+    private void jTCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTCostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTCostActionPerformed
+
+    private void jTPYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPYearActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTPYearActionPerformed
+
+    private void jTPHouseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTPHouseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTPHouseActionPerformed
+
+    private void jTIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTIDActionPerformed
+
+    private void jTNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTNameActionPerformed
+
+    private void jBBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBooksActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBBooksActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1142,6 +1257,7 @@ public class Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBooks;
     private javax.swing.JButton jBClient;
+    private javax.swing.JButton jBOrders;
     private javax.swing.JButton jBSoftware;
     private javax.swing.JButton jBSubmit;
     private javax.swing.JButton jButton1;
@@ -1180,6 +1296,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTAddress;
     private javax.swing.JTextField jTAuthor;
     private javax.swing.JTextField jTClientName;
@@ -1199,6 +1316,7 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTextField jTSubTotal;
     private javax.swing.JTextField jTTotal;
     private javax.swing.JTextField jTVAT;
+    private javax.swing.JTable jTableOrders;
     // End of variables declaration//GEN-END:variables
 }
 class Products{
