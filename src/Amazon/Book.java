@@ -38,7 +38,13 @@ class Book extends Products{
         
     }
     public void setBookISBN(String bISBN){
+        if (!bISBN.equals(""))
         this.bISBN=bISBN;
+        else {
+            JOptionPane.showMessageDialog(null, "The ISBN\n"
+                + "cannot be empty!");
+        }
+        
     }
     public void setNumberPages(int bNumberPages, int check){
         
