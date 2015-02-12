@@ -13,10 +13,10 @@ public class Order {
     private int oID;
     private String cName;
     private String cAddress;
-    private int cPhoneNumber;
+    private String cPhoneNumber;
     private String cEmail;
     
-public Order(int oID, String cName, String cAddress, int cPhoneNumber, String cEmail){
+public Order(int oID, String cName, String cAddress, String cPhoneNumber, String cEmail){
         
         this.oID = oID;
         this.cName = cName;
@@ -36,7 +36,7 @@ public void setOrderID(int oID){
     public void setClientAddress(String cAddress){
         this.cAddress=cAddress;
     }
-    public void setClientPhoneNumber(int cPhoneNumber){
+    public void setClientPhoneNumber(String cPhoneNumber){
         this.cPhoneNumber=cPhoneNumber;
     }
     public void setClientEmail(String cEmail){
@@ -53,7 +53,7 @@ public void setOrderID(int oID){
     public String getClientAddress(){
         return cAddress;
     }
-    public int getClientPhoneNumber(){
+    public String getClientPhoneNumber(){
         return cPhoneNumber;
     }
     public String getClientEmail(){

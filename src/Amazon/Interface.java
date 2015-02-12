@@ -23,9 +23,13 @@ public class Interface extends javax.swing.JFrame {
     int currentBook = 0;
     int currentSoftware = 0;
     int currentOrder = 0;
+    int number =0;
+    int number1 =0;
     Book[] bookList;
     Software[] softwareList;
     Order[] orderList;
+    int [] bookOrderIndex = new int[100];
+    int [] softwareOrderIndex =new int[100];
     private static boolean conditionsCheck = true;
     
     double subTotalB = 0;
@@ -36,18 +40,21 @@ public class Interface extends javax.swing.JFrame {
     DefaultListModel dlmSoftware = new DefaultListModel();
     DefaultListModel dlmOrder = new DefaultListModel();
     DefaultListModel dlmCost = new DefaultListModel();
+    DefaultTableModel dtmOrder;
+    DefaultTableModel dtmOrderClient;
+    
     
     /**
      * Creates new form Interface
      */
     
     public Interface() {
-        
+
         this.bookList = new Book [100];
         this.softwareList = new Software [100];
         this.orderList = new Order [100];
         
-        
+      
         initComponents();
         
         //Products p1 = new Products(1,"Microsoft Office",99.99,2014,"Microsoft");
@@ -91,8 +98,8 @@ public class Interface extends javax.swing.JFrame {
         jTPhoneNumber.setVisible(false);
         jLEmail.setVisible(false);
         jTEmail.setVisible(false);
-        
-        
+        jSTableOrder.setVisible(false);
+        jSTableClient.setVisible(false);
         
     }
 
@@ -144,8 +151,10 @@ public class Interface extends javax.swing.JFrame {
         jTPhoneNumber = new javax.swing.JTextField();
         jLEmail = new javax.swing.JLabel();
         jTEmail = new javax.swing.JTextField();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jTableOrders = new javax.swing.JTable();
+        jSTableOrder = new javax.swing.JScrollPane();
+        jTableOrder = new javax.swing.JTable();
+        jSTableClient = new javax.swing.JScrollPane();
+        jTableClientDetails = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListBooks = new javax.swing.JList();
@@ -153,12 +162,13 @@ public class Interface extends javax.swing.JFrame {
         jListSoftware = new javax.swing.JList();
         jButtonBookOrder = new javax.swing.JButton();
         jButtonSoftwareOrder = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        jPanelOrderSumary = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListOrder = new javax.swing.JList();
-        jButton1 = new javax.swing.JButton();
+        jBDelete = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLCostumer = new javax.swing.JLabel();
+        jBPlaceOrder = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jTSubTotal = new javax.swing.JTextField();
@@ -400,15 +410,25 @@ public class Interface extends javax.swing.JFrame {
             }
         });
 
-        jTableOrders.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-
+                {null, null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-
+                "P. ID:", "P. Name:", "P. House:", "P. Year:", "Cost", "A. Name:", "Pages", "ISBN", "Hard Disk", "P. Speed", "Min. Req."
             }
         ));
-        jScrollPane5.setViewportView(jTableOrders);
+        jSTableOrder.setViewportView(jTableOrder);
+
+        jTableClientDetails.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Order ID:", "Client Name:", "Address:", "Phone:", "Email:"
+            }
+        ));
+        jSTableClient.setViewportView(jTableClientDetails);
 
         javax.swing.GroupLayout jPGroupsLayout = new javax.swing.GroupLayout(jPGroups);
         jPGroups.setLayout(jPGroupsLayout);
@@ -417,7 +437,6 @@ public class Interface extends javax.swing.JFrame {
             .addGroup(jPGroupsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5)
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLAddress)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -451,42 +470,41 @@ public class Interface extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTISBN))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
-                        .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPGroupsLayout.createSequentialGroup()
-                                .addComponent(jLPhoneNumber)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLEmail)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTEmail))
-                            .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPGroupsLayout.createSequentialGroup()
-                                    .addComponent(jLPYear)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTPYear, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLCost)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTCost))
-                                .addComponent(jLabelNumberOfPages)
-                                .addGroup(jPGroupsLayout.createSequentialGroup()
-                                    .addComponent(jLPHouse)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTPHouse))
-                                .addGroup(jPGroupsLayout.createSequentialGroup()
-                                    .addComponent(jLID)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTID, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jLName)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLPhoneNumber)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLEmail)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTEmail))
+                    .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPGroupsLayout.createSequentialGroup()
+                            .addComponent(jLPYear)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTPYear, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLCost)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTCost))
+                        .addComponent(jLabelNumberOfPages)
+                        .addGroup(jPGroupsLayout.createSequentialGroup()
+                            .addComponent(jLPHouse)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTPHouse))
+                        .addGroup(jPGroupsLayout.createSequentialGroup()
+                            .addComponent(jLID)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTID, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLName)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jTName, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPGroupsLayout.createSequentialGroup()
                         .addComponent(jLAuthor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTAuthor)))
+                        .addComponent(jTAuthor))
+                    .addComponent(jSTableOrder, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSTableClient, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPGroupsLayout.setVerticalGroup(
@@ -526,7 +544,7 @@ public class Interface extends javax.swing.JFrame {
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLPSpeed)
                     .addComponent(jTPSpeed, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPGroupsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLMReq)
                     .addComponent(jTMReq, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -547,9 +565,12 @@ public class Interface extends javax.swing.JFrame {
                     .addComponent(jLEmail)
                     .addComponent(jTEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSTableClient, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelNumberOfPages))
+                .addComponent(jLabelNumberOfPages)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSTableOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "INVENTORY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -609,7 +630,7 @@ public class Interface extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "ORDER SUMARY", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jPanelOrderSumary.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "SHOPPING CART", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jListOrder.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -618,10 +639,10 @@ public class Interface extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jListOrder);
 
-        jButton1.setText("Delete Item");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jBDelete.setText("Delete Item");
+        jBDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jBDeleteActionPerformed(evt);
             }
         });
 
@@ -629,35 +650,44 @@ public class Interface extends javax.swing.JFrame {
 
         jLCostumer.setText("No name");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jBPlaceOrder.setText("Place Order");
+        jBPlaceOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBPlaceOrderActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanelOrderSumaryLayout = new javax.swing.GroupLayout(jPanelOrderSumary);
+        jPanelOrderSumary.setLayout(jPanelOrderSumaryLayout);
+        jPanelOrderSumaryLayout.setHorizontalGroup(
+            jPanelOrderSumaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOrderSumaryLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanelOrderSumaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(jPanelOrderSumaryLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLCostumer)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanelOrderSumaryLayout.createSequentialGroup()
+                        .addComponent(jBPlaceOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jBDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 110, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(67, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(66, 66, 66))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        jPanelOrderSumaryLayout.setVerticalGroup(
+            jPanelOrderSumaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOrderSumaryLayout.createSequentialGroup()
+                .addGroup(jPanelOrderSumaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLCostumer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addGroup(jPanelOrderSumaryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBPlaceOrder)
+                    .addComponent(jBDelete))
                 .addContainerGap())
         );
 
@@ -722,30 +752,31 @@ public class Interface extends javax.swing.JFrame {
                 .addComponent(jPOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(jBSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPGroups, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelOrderSumary, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addComponent(jBSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGap(455, 455, 455))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPOptions, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelOrderSumary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPGroups, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jBSubmit)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -765,6 +796,7 @@ public class Interface extends javax.swing.JFrame {
     private void jBBooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBBooksMouseClicked
         //Set Values:
         jTID.setText(String.valueOf(bookId));
+        
         // Button
         jPGroups.setVisible(true);
         ((javax.swing.border.TitledBorder) jPGroups.getBorder()).setTitle("ADD BOOK");
@@ -808,8 +840,9 @@ public class Interface extends javax.swing.JFrame {
         jLEmail.setVisible(false);
         jTEmail.setVisible(false);
         //Table
-        jTableOrders.setVisible(false);
-        
+        jSTableOrder.setVisible(false);
+        jSTableClient.setVisible(false);
+        bookSetter(number);
         
         //Book b1 = new Book(1,"Microsoft Office",99.99,2014,"Microsoft","Eliazer Raizel", "123123DEASD123", 365);
         
@@ -864,7 +897,9 @@ public class Interface extends javax.swing.JFrame {
         jLEmail.setVisible(false);
         jTEmail.setVisible(false);
         //Table
-        jTableOrders.setVisible(false);
+        jSTableOrder.setVisible(false);
+        jSTableClient.setVisible(false);
+        softwareSetter(number1);
     }//GEN-LAST:event_jBSoftwareMouseClicked
 
     private void jBBooksComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jBBooksComponentShown
@@ -887,12 +922,28 @@ public class Interface extends javax.swing.JFrame {
                 String bISBN = jTISBN.getText();
                 bookList[currentBook] = new Book(pID, pName, pCost, pYearPub, pPubHouse, 
                         bAuthor, bISBN, bNumberPages);
+                number++;
+                //Setter
+                //bookSetter();
+                //Book Class Testing 
+//                JOptionPane.showMessageDialog(null, "Product Id: "
+//                        +bookList[currentBook].getProductID()+"\nProduct Name: "
+//                        +bookList[currentBook].getProductName()+"\nPublishing House: "
+//                        +bookList[currentBook].getProductPublicationHouse()+"\nYear of Publication: "
+//                        +bookList[currentBook].getProductYearPublication()+"\nProduct Cost: "
+//                        +bookList[currentBook].getProductCost()+"\nBook Author: "
+//                        +bookList[currentBook].getBookAuthor()+"\nNumber of Pages: "
+//                        +bookList[currentBook].getNumberPages()+"\nISBN: "
+//                        +bookList[currentBook].getBookISBN());
                                
                 if (conditionsCheck && bAuthor.equals("")){                    
                     bookList[currentBook].setBookAuthor(bAuthor);                    
                 }
                 else if (conditionsCheck && bNumberPages<=10){
                     bookList[currentBook].setNumberPages(bNumberPages,bNumberPages); 
+                }
+                else if (conditionsCheck && bISBN.equals("")){                    
+                    bookList[currentBook].setBookISBN(bISBN);                    
                 }
                 else{
                     
@@ -926,11 +977,27 @@ public class Interface extends javax.swing.JFrame {
                             pCost, pYearPub, pPubHouse, sHardDisk, sProcSpeed, sMinRequirements);        
                     dlmSoftware.addElement("Soft "+(currentSoftware+1)+": "+
                             softwareList[currentSoftware].getProductName());
+                    number1++;
+                    //Setter 
+                    
+//                    //Software Class Testing 
+//                    JOptionPane.showMessageDialog(null, "Product Id: "
+//                        +softwareList[currentSoftware].getProductID()+"\nProduct Name: "
+//                        +softwareList[currentSoftware].getProductName()+"\nPublishing House: "
+//                        +softwareList[currentSoftware].getProductPublicationHouse()+"\nYear of Publication: "
+//                        +softwareList[currentSoftware].getProductYearPublication()+"\nProduct Cost: "
+//                        +softwareList[currentSoftware].getProductCost()+"\nHard Disk Space: "
+//                        +softwareList[currentSoftware].getSoftHardDisc()+"\nProcessor Speed: "
+//                        +softwareList[currentSoftware].getSoftProcSpeed()+"\nMinimum Requeriments: "
+//                        +softwareList[currentSoftware].getSoftMinRequirements());
+
                     jListSoftware.setModel(dlmSoftware);
                     currentSoftware++;
                     softwareId++;
                     jTID.setText(String.valueOf(softwareId));
                 }catch(IllegalArgumentException e ){
+                    JOptionPane.showMessageDialog(null, "Error there is an empty"
+                            + " field, please complete all fields before clicking submit");
             }
         }
         if(evt.getSource() == jBSubmit && jBSubmit.getText().contentEquals("Add Client")) {
@@ -939,14 +1006,24 @@ public class Interface extends javax.swing.JFrame {
                 int oID = Integer.parseInt(jTOID.getText());
                 String cName = jTClientName.getText();
                 String cAddress = jTAddress.getText();
-                int cPhoneNumber = Integer.parseInt(jTPhoneNumber.getText());
+                String cPhoneNumber = jTPhoneNumber.getText();
                 String cEmail = jTEmail.getText();
                 orderList[currentOrder] = new Order(oID, cName, cAddress, cPhoneNumber, cEmail);               
-                jLCostumer.setText(orderList[currentOrder].getClientName());                        
+                jLCostumer.setText(orderList[currentOrder].getClientName());
+                //Software Class Testing 
+//                JOptionPane.showMessageDialog(null, "Software List of Products:"
+//                    +"\nClient Name: "
+//                    +orderList[currentOrder].getClientName()+"\nClient Address: "
+//                    +orderList[currentOrder].getClientAddress()+"\nClient Phone Number: "
+//                    +orderList[currentOrder].getClientPhoneNumber()+"\nClient Email: "
+//                    +orderList[currentOrder].getClientEmail());
+//                //System.out.println(bookList[currentBook].getNumberPages());
                 currentOrder++;
                 clientId++;
                 jTOID.setText(String.valueOf(clientId));
                 }catch(IllegalArgumentException e){
+                    JOptionPane.showMessageDialog(null, "Error there is an empty"
+                            + " field, please complete all fields before clicking submit");
                     
                 }
         }
@@ -957,7 +1034,12 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jBSubmitActionPerformed
     
     private void jButtonBookOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBookOrderActionPerformed
-      
+        if (jListBooks.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "There is no Book Selected!\n"
+            +"Please select one Book in the list\n "
+            +"to add to shopping cart");
+        }
+        else{
         dlmOrder.addElement(jListBooks.getSelectedValue());
         jListOrder.setModel(dlmOrder);
         subTotalB = bookList[jListBooks.getSelectedIndex()].getProductCost()+subTotalB;
@@ -967,32 +1049,56 @@ public class Interface extends javax.swing.JFrame {
         total = (subTotalB+subTotalS)+vat;
         jTVAT.setText(String.valueOf(vat));
         jTTotal.setText(String.valueOf(total));
+        
+        }
+        int bookIndex = jListBooks.getSelectedIndex();
+        bookOrderIndex[currentOrder]=(int)bookIndex;
+        System.out.println("index: "+currentOrder+ " bookIndex: "+ bookIndex);
+        System.out.println(bookOrderIndex[currentOrder]);
+        currentOrder++;
+        
+        
     }//GEN-LAST:event_jButtonBookOrderActionPerformed
 
     private void jButtonSoftwareOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSoftwareOrderActionPerformed
-        
+        if(jListSoftware.getSelectedIndex() == -1) { 
+            JOptionPane.showMessageDialog(null, "There is no Software Selected!\n"
+            +"Please select one Software in the list\n "
+            +"to add to shopping cart");
+        }else{
         dlmOrder.addElement(jListSoftware.getSelectedValue());
         jListOrder.setModel(dlmOrder);
         subTotalS = softwareList[jListSoftware.getSelectedIndex()].getProductCost()+subTotalS;
-        //System.out.println(subTotalS+subTotalB);
         jTSubTotal.setText(String.valueOf(subTotalS+subTotalB));
         vat =  ((subTotalB+subTotalS)*0.20);
         total = (subTotalB+subTotalS)+vat;
         jTVAT.setText(String.valueOf(vat));
         jTTotal.setText(String.valueOf(total));
+        
+        }
+        int softIndex = jListSoftware.getSelectedIndex();
+        softwareOrderIndex[currentOrder]=(int)softIndex;
+        currentOrder++;
+        System.out.println("index: "+currentOrder+ "softIndex: "+ softIndex);
+        //System.out.println(softwareOrderIndex[currentOrder]);
+        
+        
     }//GEN-LAST:event_jButtonSoftwareOrderActionPerformed
 
     private void jListOrderValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jListOrderValueChanged
-       
-        
-        
+ 
     }//GEN-LAST:event_jListOrderValueChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+    private void jBDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeleteActionPerformed
+        if (jListOrder.getSelectedIndex() == -1){
+            JOptionPane.showMessageDialog(null, "There is no Item Selected!\n"
+            +"Please select one Item in the list\n "
+            +"to be deleted");
+        }        
         String STB = jListOrder.getSelectedValue().toString();
+        System.out.println(STB);
         if (STB.contains("B")){
-            //
+            
             subTotalB = (subTotalB - bookList[jListOrder.getSelectedIndex()].getProductCost());
             jTSubTotal.setText(String.valueOf(subTotalB+subTotalS));
             vat =  ((subTotalB+subTotalS)*0.20);
@@ -1001,10 +1107,11 @@ public class Interface extends javax.swing.JFrame {
             jTTotal.setText(String.valueOf(total));
             dlmOrder.removeElement(jListOrder.getSelectedValue());
             
+            
         }
         if (STB.contains("S")){
         
-            //
+            
             subTotalS = (subTotalS - softwareList[jListOrder.getSelectedIndex()].getProductCost());
             jTSubTotal.setText(String.valueOf(subTotalS+subTotalB));
             vat =  ((subTotalB+subTotalS)*0.20);
@@ -1012,32 +1119,11 @@ public class Interface extends javax.swing.JFrame {
             jTVAT.setText(String.valueOf(vat));
             jTTotal.setText(String.valueOf(total));
             dlmOrder.removeElement(jListOrder.getSelectedValue());
+            
         }
             
-        //System.out.print("\nSof="+textS);
-        //System.out.print("\nSof="+STB);
         
-        
-        
-//        System.out.print("\nSof="+subTotalS);
-//        System.out.print("\nBooks="+ subTotalB);
-//        System.out.print("\n=====Books========");
-//        System.out.print(subTotalB - bookList[jListOrder.getSelectedIndex()].getProductCost());
-//        System.out.print("\n=====Software============");
-//        System.out.print(subTotalS - softwareList[jListOrder.getSelectedIndex()].getProductCost());
-//        
-        //try{
-        //    subTotalS = subTotalS - bookList[jListOrder.getSelectedIndex()].getProductCost();
-        //}catch(Exception e){
-        //    
-        //}
-        ///try{
-        //    subTotalB = subTotalB - softwareList[jListOrder.getSelectedIndex()].getProductCost();
-        //}catch(Exception e){
-        //    
-        //}
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jBDeleteActionPerformed
 
     private void jBClientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBClientMouseClicked
         //Button:
@@ -1084,7 +1170,8 @@ public class Interface extends javax.swing.JFrame {
         jLEmail.setVisible(true);
         jTEmail.setVisible(true);
         //Table
-        jTableOrders.setVisible(false);
+        jSTableOrder.setVisible(false);
+        jSTableClient.setVisible(false);
     }//GEN-LAST:event_jBClientMouseClicked
 
     private void jBClientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBClientActionPerformed
@@ -1092,7 +1179,24 @@ public class Interface extends javax.swing.JFrame {
     }//GEN-LAST:event_jBClientActionPerformed
 
     private void jBOrdersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBOrdersMouseClicked
-        // TODO add your handling code here:
+        int counter = jListOrder.getModel().getSize();
+        dtmOrderClient.insertRow(dtmOrderClient.getRowCount(), new Object[]{
+            orderList[0].getOrderID(),
+            orderList[0].getClientName(),
+            orderList[0].getClientAddress(),
+            orderList[0].getClientPhoneNumber(),
+            orderList[0].getClientEmail()});
+        
+        for(int i=0;i<counter;i++){
+        dtmOrder.insertRow(dtmOrder.getRowCount(), new Object[]{bookList[i].getProductID(),
+            bookList[i].getProductName(),
+            bookList[i].getProductPublicationHouse(),
+            bookList[i].getProductYearPublication(),
+            bookList[i].getProductCost(),
+            bookList[i].getBookAuthor(),
+            bookList[i].getNumberPages(),
+            bookList[i].getBookISBN()});
+        }
     }//GEN-LAST:event_jBOrdersMouseClicked
 
     private void jBOrdersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBOrdersActionPerformed
@@ -1101,7 +1205,7 @@ public class Interface extends javax.swing.JFrame {
         jTOID.setText(String.valueOf(clientId));
         ((javax.swing.border.TitledBorder) jPGroups.getBorder()).setTitle("VIEW ORDERS");
         jPGroups.repaint();
-        jBSubmit.setText("Dispach");
+        jBSubmit.setText("dispatch");
         jBSubmit.setVisible(true);  
         //Book:
         jLAuthor.setVisible(false);
@@ -1140,8 +1244,164 @@ public class Interface extends javax.swing.JFrame {
         jLEmail.setVisible(false);
         jTEmail.setVisible(false);
         //Table
-        jTableOrders.setVisible(true);
+        jSTableOrder.setVisible(true);
+        jSTableClient.setVisible(true);
     }//GEN-LAST:event_jBOrdersActionPerformed
+
+    private void bookSetter(int number){
+        if(number == 0){
+            //Products
+            jTID.setText(String.valueOf(1));
+            jTName.setText("Head First Java");
+            jTPHouse.setText("O'Reilly Publishing House");
+            jTPYear.setText(String.valueOf(2005));
+            jTCost.setText(String.valueOf(19.95));
+            //Books:
+            jTAuthor.setText("Khaty Bates");
+            jTNPages.setText(String.valueOf(720));
+            jTISBN.setText("1232-122-12346-122-22");
+        }
+        if(number == 1){
+            //Products
+            jTID.setText(String.valueOf(2));
+            jTName.setText("Lord of the Rings");
+            jTPHouse.setText("Houghton Mifflin Harcourt");
+            jTPYear.setText(String.valueOf(2012));
+            jTCost.setText(String.valueOf(5.95));
+            //Books:
+            jTAuthor.setText("J.R.R. Tolkien");
+            jTNPages.setText(String.valueOf(350));
+            jTISBN.setText("1222-562-14546-442-12");
+        }
+        if(number == 2){
+            //Products
+            jTID.setText(String.valueOf(3));
+            jTName.setText("Shakespeare's Stories for Young Readers");
+            jTPHouse.setText("Dover Publications");
+            jTPYear.setText(String.valueOf(2012));
+            jTCost.setText(String.valueOf(14.54));
+            //Books:
+            jTAuthor.setText("E. Nesbit");
+            jTNPages.setText(String.valueOf(129));
+            jTISBN.setText("9932-132-00336-123-21");
+        }
+        if(number == 3){
+            //Products
+            jTID.setText(String.valueOf(4));
+            jTName.setText("Thoughts On Religious Experience");
+            jTPHouse.setText("GLH Publishing");
+            jTPYear.setText(String.valueOf(2015));
+            jTCost.setText(String.valueOf(8.79));
+            //Books:
+            jTAuthor.setText("Archibald Alexander");
+            jTNPages.setText(String.valueOf(530));
+            jTISBN.setText("w32-3322-3346-522-42");
+        }
+        if(number == 4){
+            //Products
+            jTID.setText(String.valueOf(5));
+            jTName.setText("Hard Fighting Soldier:");
+            jTPHouse.setText("Ambassador International");
+            jTPYear.setText(String.valueOf(2000));
+            jTCost.setText(String.valueOf(1.99));
+            //Books:
+            jTAuthor.setText("David Siton");
+            jTNPages.setText(String.valueOf(89));
+            jTISBN.setText("232-1322-W2346-142-32");
+        }
+        
+    }
+    private void softwareSetter(int number){
+        if(number == 0){
+            //Products
+            jTID.setText(String.valueOf(1));
+            jTName.setText("Microsoft Office 2013");
+            jTPHouse.setText("Microsof Inc");
+            jTPYear.setText(String.valueOf(2013));
+            jTCost.setText(String.valueOf(199.95));
+            //Software:
+            jTHDisk.setText(String.valueOf(5));
+            jTPSpeed.setText(String.valueOf(4.4));
+            jTMReq.setText("Windows 7");
+           
+        }
+        if(number == 1){
+            //Products
+            jTID.setText(String.valueOf(2));
+            jTName.setText("Microsoft Windows 10");
+            jTPHouse.setText("Microsof Inc");
+            jTPYear.setText(String.valueOf(2015));
+            jTCost.setText(String.valueOf(399.95));
+            //Software:
+            jTHDisk.setText(String.valueOf(30));
+            jTPSpeed.setText(String.valueOf(4.9));
+            jTMReq.setText("Intel Quad Core, 30GB Storage");
+        }
+        if(number == 2){
+            //Products
+            jTID.setText(String.valueOf(3));
+            jTName.setText("Winzip");
+            jTPHouse.setText("PackSoft");
+            jTPYear.setText(String.valueOf(2000));
+            jTCost.setText(String.valueOf(0.0));
+            //Software:
+            jTHDisk.setText(String.valueOf(100));
+            jTPSpeed.setText(String.valueOf(4.9));
+            jTMReq.setText("Windows XP, 2GB Ram, 100MB Storage");
+        }
+        if(number == 3){
+            //Products
+            jTID.setText(String.valueOf(4));
+            jTName.setText("Photoshop CS6");
+            jTPHouse.setText("Adobe");
+            jTPYear.setText(String.valueOf(2014));
+            jTCost.setText(String.valueOf(359.95));
+            //Software:
+            jTHDisk.setText(String.valueOf(5));
+            jTPSpeed.setText(String.valueOf(5.5));
+            jTMReq.setText("Windows 8, iOS x, 5GB Storage");
+        }
+        if(number == 4){
+            //Products
+            jTID.setText(String.valueOf(5));
+            jTName.setText("Minecraft");
+            jTPHouse.setText("Mojang");
+            jTPYear.setText(String.valueOf(2009));
+            jTCost.setText(String.valueOf(17.45));
+            //Software:
+            jTHDisk.setText(String.valueOf(1));
+            jTPSpeed.setText(String.valueOf(4.9));
+            jTMReq.setText("Windows 7, 2GB RAM, 1GB Storage, 2GB Graphics");
+        }
+        
+    }
+    private void jBBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBooksActionPerformed
+        
+// TODO add your handling code here:
+    }//GEN-LAST:event_jBBooksActionPerformed
+
+    private void jBPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBPlaceOrderActionPerformed
+        // to do :
+        int counter= jListOrder.getModel().getSize();
+        System.out.println("Size of jListOrder = "+counter);
+        System.out.println(jListOrder.getModel().getElementAt(counter-1));
+        
+        for (int i =0; i<counter;i++){
+            JOptionPane.showMessageDialog(null, "Product Id: "
+                        +bookList[i].getProductID()+"\nProduct Name: "
+                        +bookList[i].getProductName()+"\nPublishing House: "
+                        +bookList[i].getProductPublicationHouse()+"\nYear of Publication: "
+                        +bookList[i].getProductYearPublication()+"\nProduct Cost: "
+                        +bookList[i].getProductCost()+"\nBook Author: "
+                        +bookList[i].getBookAuthor()+"\nNumber of Pages: "
+                        +bookList[i].getNumberPages()+"\nISBN: "
+                        +bookList[i].getBookISBN());
+        }
+        
+        
+        
+        //find a way to record the bookList[number] that was sent to Jlist Order
+    }//GEN-LAST:event_jBPlaceOrderActionPerformed
 
     private void jPGroupsAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_jPGroupsAncestorAdded
         // TODO add your handling code here:
@@ -1215,10 +1475,6 @@ public class Interface extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTNameActionPerformed
 
-    private void jBBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBBooksActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jBBooksActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -1257,10 +1513,11 @@ public class Interface extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBBooks;
     private javax.swing.JButton jBClient;
+    private javax.swing.JButton jBDelete;
     private javax.swing.JButton jBOrders;
+    private javax.swing.JButton jBPlaceOrder;
     private javax.swing.JButton jBSoftware;
     private javax.swing.JButton jBSubmit;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonBookOrder;
     private javax.swing.JButton jButtonSoftwareOrder;
     private javax.swing.JLabel jLAddress;
@@ -1291,12 +1548,13 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JPanel jPGroups;
     private javax.swing.JPanel jPOptions;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanelOrderSumary;
+    private javax.swing.JScrollPane jSTableClient;
+    private javax.swing.JScrollPane jSTableOrder;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTAddress;
     private javax.swing.JTextField jTAuthor;
     private javax.swing.JTextField jTClientName;
@@ -1316,7 +1574,8 @@ public class Interface extends javax.swing.JFrame {
     private javax.swing.JTextField jTSubTotal;
     private javax.swing.JTextField jTTotal;
     private javax.swing.JTextField jTVAT;
-    private javax.swing.JTable jTableOrders;
+    private javax.swing.JTable jTableClientDetails;
+    private javax.swing.JTable jTableOrder;
     // End of variables declaration//GEN-END:variables
 }
 class Products{
@@ -1374,9 +1633,5 @@ class Products{
         return pPubHouse;
     }
     
-    
-
-
-
-
 }
+
